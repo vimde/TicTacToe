@@ -1,6 +1,6 @@
 package com.tdd.tic.tac.toe;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -55,4 +55,53 @@ public class TicTacToeSpec {
 		ticTacToe.play(1, 3);
 		assertEquals('X', ticTacToe.nextPlayer());
 	}
+
+	@Test
+	public void whenThereIsNoWinnerByDefaultTheResponseShouldBeNoWinner() {
+		assertEquals("No winner.", ticTacToe.play(2, 3));
+	}
+
+	@Test
+	public void whenHorizontalLineIsTakenByXTheWinnerIsX() {
+		ticTacToe.play(1, 1);
+		ticTacToe.play(2, 1);
+		ticTacToe.play(1, 2);
+		ticTacToe.play(2, 2);
+		String winner = ticTacToe.play(1, 3);
+		assertEquals("X is the winner.", winner);
+	}
+
+	@Test
+	public void whenVerticalLineIsTakenByOTheWinnerIsO() {
+		ticTacToe.play(2, 3);
+		ticTacToe.play(1, 1);
+		ticTacToe.play(3, 3);
+		ticTacToe.play(2, 1);
+		ticTacToe.play(3, 2);
+		String winner = ticTacToe.play(3, 1);
+		assertEquals("O is the winner.", winner);
+	}
+	
+	@Test
+	public void whenDiagonalLineIsTakenByXTheWinnerIsX() {
+		ticTacToe.play(2, 2);
+		ticTacToe.play(3, 1);
+		ticTacToe.play(1, 1);
+		ticTacToe.play(3, 2);
+		String winner = ticTacToe.play(3, 3);
+		assertEquals("X is the winner.", winner);
+	}
+	
+	@Test
+	public void whenAntiDiagonalLineIsTakenByOTheWinnerIsO() {
+		ticTacToe.play(1, 1);
+		ticTacToe.play(1, 3);
+		ticTacToe.play(1, 2);
+		ticTacToe.play(2, 2);
+		ticTacToe.play(2, 3);
+		String winner = ticTacToe.play(3, 1);
+		assertEquals("O is the winner.", winner);
+	}
+	
+	
 }

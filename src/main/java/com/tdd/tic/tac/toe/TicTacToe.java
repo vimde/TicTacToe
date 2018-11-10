@@ -13,12 +13,26 @@ public class TicTacToe {
 
 	public String play(int x, int y) {
 		checkPositions(x, y);
-		checkIfOccupied(x, y);
-		occupySpot(x, y);
+		checkIfSpotHasBeenTaken(x, y);
+		takeSpot(x, y);
 		if (theCurrentPlayerHasWon()) {
 			return currentPlayer + " is the winner.";
 		}
+		if (allTheSpotsAreTaken()) {
+			return "The result is a draw.";
+		}
 		return "No winner.";
+	}
+
+	private boolean allTheSpotsAreTaken() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (board[i][j] == '\0') {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	private boolean theCurrentPlayerHasWon() {
@@ -42,12 +56,12 @@ public class TicTacToe {
 		return false;
 	}
 
-	private void occupySpot(int x, int y) {
+	private void takeSpot(int x, int y) {
 		board[x - 1][y - 1] = nextPlayer;
 		nextPlayer = (nextPlayer == 'X') ? 'O' : 'X';
 	}
 
-	private void checkIfOccupied(int x, int y) {
+	private void checkIfSpotHasBeenTaken(int x, int y) {
 		if (board[x - 1][y - 1] != '\0') {
 			throw new RuntimeException("Spot has already been occupied");
 		}

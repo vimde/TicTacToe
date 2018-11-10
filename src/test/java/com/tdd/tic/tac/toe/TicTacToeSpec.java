@@ -81,7 +81,7 @@ public class TicTacToeSpec {
 		String winner = ticTacToe.play(3, 1);
 		assertEquals("O is the winner.", winner);
 	}
-	
+
 	@Test
 	public void whenDiagonalLineIsTakenByXTheWinnerIsX() {
 		ticTacToe.play(2, 2);
@@ -91,7 +91,7 @@ public class TicTacToeSpec {
 		String winner = ticTacToe.play(3, 3);
 		assertEquals("X is the winner.", winner);
 	}
-	
+
 	@Test
 	public void whenAntiDiagonalLineIsTakenByOTheWinnerIsO() {
 		ticTacToe.play(1, 1);
@@ -102,6 +102,19 @@ public class TicTacToeSpec {
 		String winner = ticTacToe.play(3, 1);
 		assertEquals("O is the winner.", winner);
 	}
-	
-	
+
+	@Test
+	public void whenAllSpotsAreTakenThenTheResultIsADraw() {
+		ticTacToe.play(1, 1);
+		ticTacToe.play(1, 2);
+		ticTacToe.play(1, 3);
+		ticTacToe.play(2, 1);
+		ticTacToe.play(2, 3);
+		ticTacToe.play(2, 2);
+		ticTacToe.play(3, 1);
+		ticTacToe.play(3, 3);
+		String actual = ticTacToe.play(3, 2);
+		assertEquals("The result is a draw.", actual);
+	}
+
 }

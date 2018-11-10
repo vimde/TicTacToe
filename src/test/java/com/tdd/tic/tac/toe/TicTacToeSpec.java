@@ -1,5 +1,7 @@
 package com.tdd.tic.tac.toe;
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,5 +36,23 @@ public class TicTacToeSpec {
 		ticTacToe.play(2, 3);
 		exception.expect(RuntimeException.class);
 		ticTacToe.play(2, 3);
+	}
+
+	@Test
+	public void whenGameBeginsTheFirstTurnShouldBePlayedByX() {
+		assertEquals('X', ticTacToe.nextPlayer());
+	}
+
+	@Test
+	public void whenXHasPlayedTheNextPlayerShouldBeO() {
+		ticTacToe.play(2, 2);
+		assertEquals('O', ticTacToe.nextPlayer());
+	}
+
+	@Test
+	public void whenOHasPlayerTheNextPlayerShouldBeX() {
+		ticTacToe.play(2, 2);
+		ticTacToe.play(1, 3);
+		assertEquals('X', ticTacToe.nextPlayer());
 	}
 }
